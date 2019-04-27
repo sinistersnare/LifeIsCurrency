@@ -70,9 +70,9 @@ public static class SaveData
     public static int money = 0;
 
     public static int healthIdx = 0;
+    public static int autoIdx = 0;
 
-    public static int Health { get
-        {
-            return ShopItems.hpValues[healthIdx];
-        } }
+    public static int Health { get { return ShopItems.hpValues[healthIdx]; } }
+
+    public static bool HasAuto { get { return ShopItems.automaticValues[autoIdx]; } }
 }

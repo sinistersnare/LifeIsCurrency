@@ -8,11 +8,14 @@ public class ShopController : MonoBehaviour
 {
     public Text moneyText;
     public GameObject hpShopper;
+    public GameObject autoGunShopper;
 
     void Start()
     {
         hpShopper.GetComponentInChildren<Button>().onClick.AddListener(this.BuyMoreHp);
+        autoGunShopper.GetComponentInChildren<Button>().onClick.AddListener(this.BuyAutoGun);
         this.SetUpShop(this.hpShopper, ShopItems.hpPrices[SaveData.healthIdx], ShopItems.hpValues[SaveData.healthIdx]);
+        this.SetUpShop(this.autoGunShopper, ShopItems.automaticPrices[SaveData.autoIdx], ShopItems.automaticValues[SaveData.autoIdx]);
         this.UpdateMoney();
     }
 
@@ -40,6 +43,20 @@ public class ShopController : MonoBehaviour
     public void BackToFight()
     {
         SceneManager.LoadScene("FightScene");
+    }
+
+    public void BuyAutoGun()
+    {
+        int price = ShopItems.automaticPrices[SaveData.autoIdx];
+        print("Price is " + price);
+        if (SaveData.money >= price)
+        {
+            print("WORKED OUT!");
+            SaveData.money -= price;
+            SaveData.autoIdx++;
+            this.SetUpShop(this.autoGunShopper, ShopItems.automaticPrices[SaveData.autoIdx], SaveData.HasAuto);
+            this.UpdateMoney();
+        }
     }
 
     public void BuyMoreHp()

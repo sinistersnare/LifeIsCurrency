@@ -7,12 +7,16 @@ public class Gun : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform bulletSpawnPoint;
     public float refreshTime = 1;
+    public bool isAutomatic = false;
     private float lastShotTime;
 
     void Update()
     {
         this.RotateArm();
-        if (Input.GetButtonDown("Fire1") && ((Time.time - lastShotTime) >= refreshTime))
+
+        bool cond = this.isAutomatic ? (Input.GetButton("Fire1") && ((Time.time - lastShotTime) >= refreshTime))
+                                     : (Input.GetButtonDown("Fire1") && ((Time.time - lastShotTime) >= refreshTime));
+        if (cond)
         {
             lastShotTime = Time.time;
             GameObject bullet = GameObject.Instantiate(this.bulletPrefab, this.bulletSpawnPoint.position, this.transform.rotation);

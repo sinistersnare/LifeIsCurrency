@@ -7,11 +7,11 @@ public class PlayerController : MonoBehaviour
 {
     public int health = 1;
     public float speed = 6;
-    public GameObject[] gunPrefabs;
+    public List<GameObject> gunPrefabs;
     public float arenaRadius;
 
     private int currentGun = 0;
-    private GameObject[] gunObjects;
+    private List<GameObject> gunObjects;
     private Vector2 movementVector = Vector2.zero;
     private Rigidbody2D body;
     private SpriteRenderer spriteRenderer;
@@ -20,13 +20,15 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         this.body = this.GetComponent<Rigidbody2D>();
-        this.gunObjects = new GameObject[this.gunPrefabs.Length];
+        this.gunObjects = new List<GameObject>(this.gunPrefabs.Count);
         this.spriteRenderer = this.GetComponent<SpriteRenderer>();
-        for (int i=0; i < this.gunObjects.Length; i++)
+        foreach (GameObject gunPrefab in gunPrefabs)
         {
-            this.gunObjects[i] = GameObject.Instantiate(this.gunPrefabs[i], this.transform.position, 
-                                                        Quaternion.identity, this.transform);
-            this.gunObjects[i].SetActive(i == this.currentGun); // just activate the first.
+            gunObjects.Add(GameObject.Instantiate(gunPrefab, this.transform.position, Quaternion.identity, this.transform));
+        }
+        for (int i = 0; i < gunObjects.Count; i++)
+        {
+            gunObjects[i].SetActive(i == currentGun);
         }
     }
 
@@ -43,6 +45,27 @@ public class PlayerController : MonoBehaviour
         if (this.health == 0)
         {
             this.StartCoroutine(this.DeathSequence(3));
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1)) { this.ChangeGun(0); }
+        if (Input.GetKeyDown(KeyCode.Alpha2)) { this.ChangeGun(1); }
+        if (Input.GetKeyDown(KeyCode.Alpha3)) { this.ChangeGun(2); }
+        if (Input.GetKeyDown(KeyCode.Alpha4)) { this.ChangeGun(3); }
+        if (Input.GetKeyDown(KeyCode.Alpha5)) { this.ChangeGun(4); }
+        if (Input.GetKeyDown(KeyCode.Alpha6)) { this.ChangeGun(5); }
+        if (Input.GetKeyDown(KeyCode.Alpha7)) { this.ChangeGun(6); }
+        if (Input.GetKeyDown(KeyCode.Alpha8)) { this.ChangeGun(7); }
+        if (Input.GetKeyDown(KeyCode.Alpha9)) { this.ChangeGun(8); }
+        if (Input.GetKeyDown(KeyCode.Alpha0)) { this.ChangeGun(9); }
+    }
+
+    private void ChangeGun(int idxPos)
+    {
+        if (idxPos < this.gunObjects.Count)
+        {
+            this.gunObjects[this.currentGun].SetActive(false);
+            this.currentGun = idxPos;
+            this.gunObjects[this.currentGun].SetActive(true);
         }
     }
 

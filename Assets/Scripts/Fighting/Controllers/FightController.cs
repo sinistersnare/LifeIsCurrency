@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class FightController : MonoBehaviour
 {
     public GameObject playerPrefab;
+    public GameObject autoGunPrefab;
     public GameObject enemySpawnerPrefab;
     public Transform arenaTransform;
 
@@ -19,8 +20,8 @@ public class FightController : MonoBehaviour
         playerObject.name = "Player";
         PlayerController pc = playerObject.GetComponent<PlayerController>();
         pc.health = SaveData.Health;
+        if (SaveData.HasAuto) { pc.gunPrefabs.Add(this.autoGunPrefab); }
         pc.arenaRadius = arenaRadius;
-        // TODO fill out PC from saved info when level starts.
 
         GameObject spawnerObject = GameObject.Instantiate(this.enemySpawnerPrefab, Vector3.zero, Quaternion.identity);
         spawnerObject.name = "Enemy Spawner";
