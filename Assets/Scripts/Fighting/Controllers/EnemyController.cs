@@ -13,20 +13,22 @@ public class EnemyController : MonoBehaviour
     public float speed = 1f;
     public int health = 3;
 
-    void Start()
-    {
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // TODO maybe be a bit more descriptive than just 'not enemy' able to kill the enemy.
         if (!collision.gameObject.CompareTag("Enemy"))
         {
-            if (--this.health == 0)
-            {
-                GameObject.Destroy(this.gameObject);
-                this.levelController.killed++;
-            }
+            this.TakeHit(1);
+        }
+    }
+
+    public void TakeHit(int amt)
+    {
+        this.health -= amt;
+        if (this.health <= 0)
+        {
+            GameObject.Destroy(this.gameObject);
+            this.levelController.killed++;
         }
     }
 

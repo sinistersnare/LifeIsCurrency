@@ -10,14 +10,12 @@ public class Bullet : MonoBehaviour
     public int objectsToHit = 2;
 
     private Vector3 direction;
-    private Rigidbody2D body;
     private float liveTime;
 
     void Start()
     {
         // cast to Vector2 to zero z-part.
         this.direction = ((Vector2)target - (Vector2) this.transform.position).normalized;
-        this.body = this.GetComponent<Rigidbody2D>();
     }
 
 

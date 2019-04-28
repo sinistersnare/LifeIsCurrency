@@ -78,7 +78,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 4456875875600900477, guid: 6d709db9b25ff4f2f88cfebd637fbfbf,
     type: 3}
   bulletSpawnPoint: {fileID: 8073153011479288943}
-  refreshTime: 0.1
+  refreshTime: 0.3
+  isAutomatic: 1
 --- !u!1 &2112699913049364697
 GameObject:
   m_ObjectHideFlags: 0

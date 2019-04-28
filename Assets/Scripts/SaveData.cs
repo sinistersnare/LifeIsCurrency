@@ -67,12 +67,16 @@ namespace SerializeStatic_NET
 
 public static class SaveData
 {
+    public static float highScore = 0;
     public static int money = 0;
 
     public static int healthIdx = 0;
     public static int autoIdx = 0;
+    public static int bomberIdx = 0;
 
     public static int Health { get { return ShopItems.hpValues[healthIdx]; } }
 
     public static bool HasAuto { get { return ShopItems.automaticValues[autoIdx]; } }
+
+    public static bool HasBomber { get { return ShopItems.bomberValues[bomberIdx]; } }
 }

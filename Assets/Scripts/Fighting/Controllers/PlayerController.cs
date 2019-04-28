@@ -9,9 +9,11 @@ public class PlayerController : MonoBehaviour
     public float speed = 6;
     public List<GameObject> gunPrefabs;
     public float arenaRadius;
+    public GameObject bombHolsterPrefab;
 
     private int currentGun = 0;
     private List<GameObject> gunObjects;
+    private BombHolster bombHolster;
     private Vector2 movementVector = Vector2.zero;
     private Rigidbody2D body;
     private SpriteRenderer spriteRenderer;
@@ -30,6 +32,11 @@ public class PlayerController : MonoBehaviour
         {
             gunObjects[i].SetActive(i == currentGun);
         }
+        if (this.bombHolsterPrefab != null)
+        {
+            this.bombHolster = GameObject.Instantiate(this.bombHolsterPrefab, this.transform.position, Quaternion.identity, this.transform)
+                                         .GetComponent<BombHolster>();
+        }
     }
 
     private void FixedUpdate()
@@ -42,7 +49,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (this.health == 0)
+        if (this.health <= 0)
         {
             this.StartCoroutine(this.DeathSequence(3));
         }
