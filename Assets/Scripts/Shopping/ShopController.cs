@@ -93,4 +93,13 @@ public class ShopController : MonoBehaviour
             this.UpdateMoney();
         }
     }
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
 }

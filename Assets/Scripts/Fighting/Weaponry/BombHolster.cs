@@ -3,6 +3,7 @@ using System.Collections;
 
 public class BombHolster : MonoBehaviour
 {
+    //darvis is a stinky boi
     public float rechargeTime = 5;
     public GameObject bombPrefab;
 

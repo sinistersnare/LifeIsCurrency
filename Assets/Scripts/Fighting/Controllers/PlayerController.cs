@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
 
     private int currentGun = 0;
     private List<GameObject> gunObjects;
-    private BombHolster bombHolster;
     private Vector2 movementVector = Vector2.zero;
     private Rigidbody2D body;
     private SpriteRenderer spriteRenderer;
@@ -34,7 +33,8 @@ public class PlayerController : MonoBehaviour
         }
         if (this.bombHolsterPrefab != null)
         {
-            this.bombHolster = GameObject.Instantiate(this.bombHolsterPrefab, this.transform.position, Quaternion.identity, this.transform)
+            // Doesnt need to be an instance variable, we dont need anything from it...
+            GameObject.Instantiate(this.bombHolsterPrefab, this.transform.position, Quaternion.identity, this.transform)
                                          .GetComponent<BombHolster>();
         }
     }
